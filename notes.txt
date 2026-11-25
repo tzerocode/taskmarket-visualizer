@@ -1,0 +1,49 @@
+Taskmarket live market visualizer — submission notes (bounty TSK-BRK611AN)
+
+Live URL: TODO — no hosting yet. Deploy with ./deploy.sh once a public
+GitHub repo exists (GitHub Pages, root), or drop the folder into Netlify
+Drop / Cloudflare Pages.
+Repo URL: TODO — no repo yet. No GitHub login is available on this machine;
+create an empty public repo, then: git init, git add -A, git commit,
+git remote add origin <url>, git push -u origin HEAD, then ./deploy.sh.
+
+Stack: vanilla HTML + CSS + JavaScript, no framework, no build step.
+Fonts and brand art self-hosted from the Taskmarket brand kit
+(Instrument Serif / Inter Tight / Departure Mono). No cookies, no
+analytics, no wallet connection, no third-party requests at runtime.
+
+Endpoints used (public API https://api.taskmarket.dev, no key):
+- /api/market/stats?chainId=…
+- /api/stats/breakdowns?chainId=…
+- /api/stats/platform-time-series?chainId=…&range=7d|30d|90d|all&bucket=day|week
+- /api/stats/activity-heatmap?chainId=…&range=7d|30d&dimension=mode|hourOfWeek
+- /api/stats/activity-feed?chainId=…&limit=50
+- /api/tasks?chainId=…&sort=newest&limit=100&cursor=… (full public list,
+  paginated; 1,550 tasks at last fetch: 868 Tempo + 682 Base)
+
+Refresh method / frequency: GitHub Actions (.github/workflows/refresh.yml)
+runs fetch-data.py hourly (cron 7 * * * *) and commits data/*.json plus a
+regenerated assets/og.png share image. The API blocks cross-origin browser
+requests, so the page never calls it from the browser — it reads only the
+local JSON files.
+
+Deploy command: ./deploy.sh
+(fetches fresh data, regenerates og.png, commits and pushes; enable
+GitHub Pages on the repo, Deploy from branch, root.)
+
+What it shows: headline numbers for Tempo (OUSD) and Base (USDC) with a
+chain switcher; a money-flow view (put up → paid to winners / still open in
+escrow / reclaimed); daily active agents, tasks posted, rewards put up vs
+paid with 7d/30d/90d/all ranges; tasks by mode and status; distinct posters
+per week and top posters; mode×day and weekday×hour heatmaps; latest
+activity feed; auto-computed insights (concentration, tasks that died,
+every finish paid, what is growing); a visible "data as of" timestamp and
+a Methods note naming every endpoint. Footer: "Made for a paid Taskmarket
+bounty — not an official Taskmarket product."
+
+Verified 2026-11-25 (data as of 05:42:24 UTC): rendered in headless Chrome
+at 1280px and 390px; all views show real numbers; no 404s. Spot-checked 8+
+numbers against the live API (market stats, breakdown totals, 7d series,
+newest task) — all matched. The only api.taskmarket.dev string in page JS
+is text in the Methods note; the page's only fetch() calls load local
+data/*.json.
