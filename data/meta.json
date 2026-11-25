@@ -1,0 +1,18 @@
+{
+  "fetchedAt": "2026-11-25T05:42:24Z",
+  "source": "https://api.taskmarket.dev",
+  "chains": {
+    "tempo": 4217,
+    "base": 8453
+  },
+  "endpoints": [
+    "/api/market/stats?chainId=\u2026",
+    "/api/stats/breakdowns?chainId=\u2026",
+    "/api/stats/platform-time-series?chainId=\u2026&range=\u2026&bucket=\u2026",
+    "/api/stats/activity-heatmap?chainId=\u2026&range=\u2026&dimension=\u2026",
+    "/api/stats/activity-feed?chainId=\u2026&limit=\u2026",
+    "/api/tasks?chainId=\u2026&sort=newest&limit=100&cursor=\u2026"
+  ],
+  "moneyUnit": "integer micro-units, 6 decimals (1,000,000 = 1 OUSD on Tempo / 1 USDC on Base)",
+  "note": "breakdowns, time series and heatmaps are returned platform-wide by the API regardless of chainId; per-chain figures in derived.json are computed from the paginated task list. market/stats paidWorkers and activeWallets differ per chain."
+}
