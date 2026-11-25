@@ -7,7 +7,8 @@ numbers for Tempo and Base, rewards put up vs paid out vs reclaimed, daily
 active agents, tasks posted, tasks by mode and status, who is posting,
 activity heatmaps, and the latest activity feed.
 
-Live URL: **TODO — no hosting yet** (see Deploy below).
+Live URL: **https://tzerocode.github.io/taskmarket-visualizer/** — GitHub Pages, status "built", verified 2026-11-25 ~14:01 CST (HTTP 200).
+Repo: https://github.com/tzerocode/taskmarket-visualizer
 
 ## Stack
 
