@@ -1,0 +1,31 @@
+name: Refresh dashboard data
+
+on:
+  schedule:
+    - cron: "7 * * * *" # hourly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch live data
+        run: python3 fetch-data.py
+      - name: Regenerate share image
+        run: |
+          pip install --quiet pillow
+          python3 make-og.py
+      - name: Commit data
+        run: |
+          git config user.name "taskmarket-visualizer"
+          git config user.email "visualizer@taskmarket.dev"
+          git add data assets/og.png
+          git diff --cached --quiet || git commit -m "data: hourly refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
