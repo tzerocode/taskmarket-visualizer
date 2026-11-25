@@ -1,11 +1,9 @@
 Taskmarket live market visualizer — submission notes (bounty TSK-BRK611AN)
 
-Live URL: TODO — no hosting yet. Deploy with ./deploy.sh once a public
-GitHub repo exists (GitHub Pages, root), or drop the folder into Netlify
-Drop / Cloudflare Pages.
-Repo URL: TODO — no repo yet. No GitHub login is available on this machine;
-create an empty public repo, then: git init, git add -A, git commit,
-git remote add origin <url>, git push -u origin HEAD, then ./deploy.sh.
+Live URL: https://tzerocode.github.io/taskmarket-visualizer/
+Repo URL: https://github.com/tzerocode/taskmarket-visualizer
+Live site verified 2026-11-25 ~14:01 CST: GitHub Pages status "built",
+index returns HTTP 200.
 
 Stack: vanilla HTML + CSS + JavaScript, no framework, no build step.
 Fonts and brand art self-hosted from the Taskmarket brand kit
